@@ -1,0 +1,37 @@
+﻿<?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+<!DOCTYPE html><html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOTouch</title>
+	<link rel="stylesheet"  href="assets/css/jquery.mobile-1.4.0.min.css">
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/index.js"></script>
+	<script src="assets/js/jquery.mobile-1.4.0.min.js"></script>
+	<script src="assets/js/myjquery.js"></script>
+</head><body>
+<div id="head" data-role="header" data-position="fixed" data-theme="b">
+	<a href="about.html">
+	</a><h1></h1>
+	<div data-role="controlgroup" class="control ui-btn-right" data-type="horizontal" data-mini="true">
+	<a href="epage.html"class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-left"></a>
+	<a href="apage.html" class="ui-btn ui-corner-all ui-icon-carat-r ui-btn-icon-right"></a>
+</div></div><!-- /header --><?php } ?>
+
+<div id="index" data-role="page"><div role="main" class="ui-content">
+
+	<ul id="ilist" data-role="listview" data-count-theme="b">
+		<li><a href="apage.html"><h2></h2><span>8</span></a></li>
+		<li><a href="bpage.html"><h2></h2><span>8</span></a></li>
+		<li><a href="cpage.html"><h2></h2><span>8</span></a></li>
+		<li><a href="dpage.html"><h2></h2><span>8</span></a></li>
+		<li><a href="epage.html"><h2></h2><span>8</span></a></li>
+	</ul>
+</div><!--content-->
+	<div data-role="footer">
+		<div data-role="controlgroup" data-type="horizontal">
+		 <a href="../jm-index.html" class="ui-btn ui-corner-all ui-btn-icon-left">goto-JQM-index</a>
+		 <button class="ui-btn ui-corner-all ui-btn-icon-right">test-btn</button>
+	</div></div>
+
+</div><!--page-->
+</body></html>

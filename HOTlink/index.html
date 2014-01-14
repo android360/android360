@@ -1,0 +1,42 @@
+﻿<?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+<!DOCTYPE html><html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOTouch</title>
+	<link rel="stylesheet"  href="_assets/css/jquery.mobile-1.4.0.min.css">
+	<script src="_assets/js/jquery.js"></script>
+	<script src="_assets/js/index.js"></script>
+	<script src="_assets/js/jquery.mobile-1.4.0.min.js"></script>
+	<script src="_assets/js/mybaidu.js"></script>
+</head><body>
+	<div id="head" data-theme="b" data-role="header">
+		<a class="ui-btn-right ui-btn ui-corner-all ui-icon-navigation ui-btn-icon-notext"></a>
+		<h1>浩拓互联</h1>
+		<a class="ui-btn-left ui-btn ui-corner-all ui-icon-calendar ui-btn-icon-notext"></a>
+	</div><!--header--><?php } ?>
+<div id="index" data-role="page">
+<div role="main" class="ui-content">
+	<div class="ui-grid-b">
+     <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+     <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+     <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
+     <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+     <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+     <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
+     <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+     <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+     <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
+	</div><!--grid-->
+</div><!--content-->
+</div><!--page-->
+<?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+	<div id="foot" data-theme="c" data-role="footer">
+	   <div data-role="navbar">
+			<ul>
+				<li><a href="transition.html" data-icon="recycle"></a></li>
+				<li><a href="#" data-icon="star" class="ui-btn-active"></a></li>
+				<li><a href="#" data-icon="action"></a></li>
+			</ul>
+      </div><!-- /navbar -->
+	</div><!-- /footer --><?php } ?>
+</body></html>

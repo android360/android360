@@ -1,0 +1,87 @@
+﻿<?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+<!DOCTYPE html><html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOTouch</title>
+	<link rel="stylesheet"  href="assets/css/jquery.mobile-1.4.0.min.css">
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/index.js"></script>
+	<script src="assets/js/jquery.mobile-1.4.0.min.js"></script>
+	<script src="assets/js/myjquery.js"></script>
+</head><body>
+<div id="head" data-role="header" data-position="fixed" data-theme="b">
+	<a href="index.html"></a><h1></h1>
+	<div data-role="controlgroup" class="control ui-btn-right" data-type="horizontal" data-mini="true">
+	<a href="cpage.html" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-left"></a>
+	<a href="epage.html" class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right"></a>
+</div></div><!-- /header --><?php } ?>
+
+<div id="dpage" data-role="page"><div class="ui-content" role="main">
+		<!-- alt="图像无法显示时的替代文本" -->
+			<div id="imgview" data-role="popup" data-corners="false">
+				<a data-rel="back">Close</a>
+				<img class="popphoto" src="_assets/img/album-rh.jpg">
+			</div>
+			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img class="popphoto" src="_assets/img/album-rh.jpg">
+					<h2>Warning</h2>
+					<h2>￥18</h2>
+					</a><a></a>
+					</li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-hc.jpg">
+					<h2>Warning</h2>
+					<p>Hot Chip</p></a><a></a>
+				</li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-p.jpg">
+				<h2>Wolfgang Amadeus Phoenix</h2>
+				<p>Phoenix</p></a><a></a>
+				</li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-ok.jpg">
+					<h3>Of The Blue Colour Of The Sky</h3>
+				<p>Ok Go</p><a></a>
+				</a></li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-ws.jpg">
+					<h3>Elephant</h3>
+				<p>The White Stripes</p><a></a>
+				</a></li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-rh.jpg">
+					<h3>Kid A</h3>
+				<p>Radiohead</p><a></a>
+				</a></li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-xx.jpg">
+					<h3>XX</h3>
+				<p>XX</p><a></a>
+				</a></li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-mg.jpg">
+					<h3>Congratulations</h3>
+				<p>MGMT</p><a></a>
+				</a></li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-ag.jpg">
+					<h3>Ashes Grammar</h3>
+				<p>A Sunny Day in Glasgow</p><a></a>
+				</a></li>
+
+				<li><a href="index.html">
+					<img src="_assets/img/album-k.jpg">
+					<h3>Hot Fuss</h3>
+				<p>Killers</p><a></a>
+				</a></li>
+				<li><a id="imglist" href="#imgview" data-rel="popup" data-position-to="window" data-transition="pop">
+					<img src="_assets/img/album-af.jpg">
+					<h3>The Suburbs</h3>
+				<p>Arcade Fire</p><a></a>
+				</a></li>
+			</ul>
+
+</div><!-- /content -->
+</div><!-- /page -->
+</body></html>

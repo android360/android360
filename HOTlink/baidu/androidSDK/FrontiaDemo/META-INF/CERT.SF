@@ -1,0 +1,241 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android)
+SHA1-Digest-Manifest: HBdETRZHU2TtS/XPx3eEhAxLSUk=
+
+Name: res/drawable-xhdpi/ic_launcher.png
+SHA1-Digest: 4IedSrk87+319o90i8tsHfQreEo=
+
+Name: com/baidu/frontia/resource/share/list_divider_white.9.png
+SHA1-Digest: i1rBLdtXnTfAd4U3jkZZ5qkVDaI=
+
+Name: com/baidu/frontia/resource/share/email.png
+SHA1-Digest: knLDhnbbg9FMos4dSPA82B0/NjA=
+
+Name: com/baidu/frontia/resource/share/titlebar_btn.9.png
+SHA1-Digest: +zTCzvUiRsm9JJfjOWc4gYXpIpw=
+
+Name: com/baidu/frontia/resource/share/config.json
+SHA1-Digest: sRCVd1v4KDFXuEw1mYAJuiBDVLg=
+
+Name: com/baidu/frontia/resource/share/pager_icon_light.9.png
+SHA1-Digest: sOIW8EbSeJm+R0Y2z8bfntwD4UM=
+
+Name: res/layout/share.xml
+SHA1-Digest: bPjyP0V2v64v3Cxx+9C7A7veZFc=
+
+Name: com/baidu/frontia/resource/share/copylink.png
+SHA1-Digest: do68hLfUnJl+34qPrSjZTRixPfg=
+
+Name: res/layout/app_data_storage.xml
+SHA1-Digest: 4CrZ84lM2DYO6SKwMqQOb543SRQ=
+
+Name: res/layout/layout3.xml
+SHA1-Digest: FutWay26vKMSSGtiOz5AqNamgtY=
+
+Name: res/layout/appfragmentmain.xml
+SHA1-Digest: FqNNiMB9C6TkCBYhyzXt/OP6GpM=
+
+Name: com/baidu/frontia/resource/share/pager_icon_dark.9.png
+SHA1-Digest: v9/SGPQiZnEy4/kDSa9lWLLmsn4=
+
+Name: res/layout/lbs.xml
+SHA1-Digest: uM6YKNQJenZ3csCHuB/2WJdGi6g=
+
+Name: com/baidu/frontia/resource/share/switch-round.png
+SHA1-Digest: GTn8+PshLkhSx5b5KyBfnToFzdg=
+
+Name: com/baidu/frontia/resource/share/black_cancle_btn_mask.9.png
+SHA1-Digest: Z64F1ulV8fllAf7ZMPzRFtE4/8w=
+
+Name: com/baidu/frontia/resource/share/switch_mask.png
+SHA1-Digest: s/2ASVvwid02nw0i2PwgWS78eKo=
+
+Name: lib/mips/libpush-socket.so
+SHA1-Digest: eI0PTl3M2nfyAfUZPUD5Zm4bETs=
+
+Name: com/baidu/frontia/resource/share/sms.png
+SHA1-Digest: 2LqkgeJeIXbZkbS1YtiZMjw6xYg=
+
+Name: com/baidu/frontia/resource/share/others.png
+SHA1-Digest: C2iaFl4zWZXXn2bkNnuGKF1yU3w=
+
+Name: com/baidu/frontia/resource/share/qzone.png
+SHA1-Digest: jkUN6zqsH2HkPVWhtZpDDXnAB2w=
+
+Name: res/layout/acl.xml
+SHA1-Digest: qukA8O33tbi8XISgHMCi0meT6GI=
+
+Name: res/layout/fragment_first.xml
+SHA1-Digest: XCVF8mizHJO6UGp0Pv5OwA9QGoU=
+
+Name: com/baidu/frontia/resource/share/list_divider_black.9.png
+SHA1-Digest: pVJoE31c0K4aUFVMegJ5jEXV1ao=
+
+Name: com/baidu/frontia/resource/share/selected.png
+SHA1-Digest: SATQJSn6BfViAv325c5xsv2CpfQ=
+
+Name: com/baidu/frontia/resource/share/icon_x.png
+SHA1-Digest: NoTnQ8ZdxIYF7EO9A5ftYwzGUfo=
+
+Name: res/drawable-xxhdpi/ic_launcher.png
+SHA1-Digest: KKqaLh/DVvFp+v1KoaDw7xETvrI=
+
+Name: res/layout/personal_file_storage.xml
+SHA1-Digest: VD/mJyb4eGv85OsblxiR3OkMENQ=
+
+Name: com/baidu/frontia/resource/share/titlebar_bg.9.png
+SHA1-Digest: a7/FniobbEaUpshcRyljxy9nBHg=
+
+Name: com/baidu/frontia/resource/share/location_enabled.png
+SHA1-Digest: Q6MlmpCi65WedWq1aen0htgdNI4=
+
+Name: com/baidu/frontia/resource/share/bottom_background.png
+SHA1-Digest: ceDfBJU/uZ/9bp+1fgbTOmcxidI=
+
+Name: com/baidu/frontia/resource/share/media_icon_mask.png
+SHA1-Digest: ak/t17NtP/X4jN0jfM80GhfRHlQ=
+
+Name: res/layout/social.xml
+SHA1-Digest: JgQXKi0IiR0wzn6eVEv+0jym1jk=
+
+Name: res/layout/fragment_second.xml
+SHA1-Digest: aFAJWimfZjYIdDtB/ay4txxqdCo=
+
+Name: res/layout/fragment_main.xml
+SHA1-Digest: 8xX6zkr41LBFtpH+bsgY0o10+Eg=
+
+Name: com/baidu/frontia/resource/share/white_cancle_btn_mask.9.png
+SHA1-Digest: pV4YOfDKWwTEuX53TogrPNRFtwM=
+
+Name: lib/armeabi/libpush-socket.so
+SHA1-Digest: qT/6h+mIi+Y2C1mZL6SuT05f5+I=
+
+Name: com/baidu/frontia/resource/share/switch-background.png
+SHA1-Digest: +qR9/9rLMnOGubHC9khSr1p5nYg=
+
+Name: com/baidu/frontia/resource/share/cancel_btn_white_mask.9.png
+SHA1-Digest: jw0/jGGn6EEKDEbwtkdNcC/rnrg=
+
+Name: res/layout/layout2.xml
+SHA1-Digest: sQy78gGuq+VAhOqKpEeOasEoW5A=
+
+Name: com/baidu/frontia/resource/share/qq.png
+SHA1-Digest: dl8bO6m3PbK0RhNIaHLZwx+q3Qs=
+
+Name: com/baidu/frontia/resource/share/pager_icon_light_gray.9.png
+SHA1-Digest: 5H8aZu3gb0n2qV6ZAleKjqe/SO8=
+
+Name: com/baidu/frontia/resource/share/cancel_btn_white.9.png
+SHA1-Digest: yYHo8ON0rLAaDaPonkH6ZpqeBzE=
+
+Name: res/drawable-hdpi/ic_launcher.png
+SHA1-Digest: LbqEhG+bjsdEGtdQxoIkBZnwW8s=
+
+Name: com/baidu/frontia/resource/share/cancel_btn_black.9.png
+SHA1-Digest: soHAgAZiHkPNrxf/1mq+eR2odG8=
+
+Name: res/layout/statistics.xml
+SHA1-Digest: SN+owBQzJzy90uqyYY8qh6t5Nnw=
+
+Name: resources.arsc
+SHA1-Digest: yFYtkUFB2Id6qFoMN6mz8oT0tss=
+
+Name: com/baidu/frontia/resource/share/cancelbar_bg.9.png
+SHA1-Digest: Wn5w9TWtPg4RydrejtCapNVzEsc=
+
+Name: com/baidu/frontia/resource/share/qqweibo.png
+SHA1-Digest: Aka8EhdK4ruNu/1DP01LJNSybx0=
+
+Name: com/baidu/frontia/resource/share/sinaweibo.png
+SHA1-Digest: YVCsHBN7Lq7S2S1ZByG/Mh9qW4Y=
+
+Name: com/baidu/frontia/resource/share/pager_icon_light.png
+SHA1-Digest: lA/HoDVczLbQtrE8tL7L8yt2yPY=
+
+Name: res/drawable-ldpi/ic_launcher.png
+SHA1-Digest: AN4ZjTVhyNIFLxNn/yy9J2di9Dg=
+
+Name: com/baidu/frontia/resource/share/titlebar_btn_mask.9.png
+SHA1-Digest: ePqkQcQb/oY1kGgAez9HwRMwqXc=
+
+Name: assets/config.json
+SHA1-Digest: nkeMgBMNW2m7Kuu9lCXarMZuPC8=
+
+Name: AndroidManifest.xml
+SHA1-Digest: ug+Yg4SZrLZBcN0EJEXqN5WL/q8=
+
+Name: com/baidu/frontia/resource/share/cancel_btn_black_mask.9.png
+SHA1-Digest: HOgNwRB/fJsPnFHsVobvMP/YcFU=
+
+Name: com/baidu/frontia/resource/share/switch_frame.png
+SHA1-Digest: hOQAr/CC0vTZJuX5q9ayOF9BsHQ=
+
+Name: com/baidu/frontia/resource/share/frame_bg.9.png
+SHA1-Digest: 1u0+Az3+HFyIjZ4aukBYc8TyKjc=
+
+Name: com/baidu/frontia/resource/share/pager_icon_dark_gray.9.png
+SHA1-Digest: bAKNas7RkyxIsvgLZ9zLB1nmMfI=
+
+Name: com/baidu/frontia/resource/share/editor_bg.9.png
+SHA1-Digest: Wc8u5wt2I41M2ptY9hzAHV5qXKo=
+
+Name: com/baidu/frontia/resource/share/location.png
+SHA1-Digest: km2ngqZtM1p29rvRQXTFABElPlc=
+
+Name: res/layout/app_file_storage.xml
+SHA1-Digest: ou1kpA3YpHQlaN1iWVuQIWINKGo=
+
+Name: res/layout/role_user.xml
+SHA1-Digest: RrW0S08t7VrrByZuIB0RzNlbQrk=
+
+Name: com/baidu/frontia/resource/share/white_cancle_btn.9.png
+SHA1-Digest: lxT2zNjBJZ9T376QfZ+cKkUQTc4=
+
+Name: com/baidu/frontia/resource/share/batchshare.png
+SHA1-Digest: 3A5Ge4o98HQ4Te6S8o5KbWa+YEU=
+
+Name: com/baidu/frontia/resource/share/renren.png
+SHA1-Digest: xvDdTB3qwVLSpiv5I4FuuoZBpX0=
+
+Name: com/baidu/frontia/resource/share/tieba.png
+SHA1-Digest: eURgPVZb+fRP4qmGMGXX5c2f0Nk=
+
+Name: classes.dex
+SHA1-Digest: myGJUlMw1bgXqugDXUJtdHbu3g8=
+
+Name: com/baidu/frontia/resource/share/pager_icon_light_gray.png
+SHA1-Digest: 8H8mi06VrlmuepUChHOka0RShVA=
+
+Name: res/layout/push.xml
+SHA1-Digest: yG7yC1/wN35WsMui2UwZ4tga2Jk=
+
+Name: res/menu/main.xml
+SHA1-Digest: CxRDXN0x3Wr7g2PQdQiHDdpQ3/E=
+
+Name: com/baidu/frontia/resource/share/black_cancle_btn.9.png
+SHA1-Digest: Phvx+YAC1QiOD5p53Zi4tXWUP/Q=
+
+Name: res/drawable-mdpi/ic_launcher.png
+SHA1-Digest: Ll796e0Xafsa83DYSoA+DsTPCTk=
+
+Name: res/layout/layout4.xml
+SHA1-Digest: mQZBPwc8tZCAAlntofxxpryaFgA=
+
+Name: com/baidu/frontia/resource/share/kaixin.png
+SHA1-Digest: lBEOG+a1JDhDNG6PrFOI1dODFxY=
+
+Name: lib/x86/libpush-socket.so
+SHA1-Digest: sOy6xMNDG73dQKLBy6hL5HJdUBY=
+
+Name: res/layout/activity_main.xml
+SHA1-Digest: Pr9iR5TdkV4f4xw5xFrESLIXEmc=
+
+Name: com/baidu/frontia/resource/share/tip_words.9.png
+SHA1-Digest: XAYnk7yOUx4wKbovXQPpvsMxiGQ=
+
+Name: res/layout/social_main.xml
+SHA1-Digest: RB13qP3Uvs7LVr9zXATRD65OiKY=
+
+Name: com/baidu/frontia/resource/share/weixin.png
+SHA1-Digest: BiXeAEu1q+Tjj5pf8FDyJcUu808=
+

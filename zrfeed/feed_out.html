@@ -1,0 +1,112 @@
+<html><head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-language" content="en">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
+	<script src="jquery.zrssfeed.min.js"></script>
+	<link href="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" rel="stylesheet">
+
+	<title>zRSSFeed - Displaying RSS feeds with jQuery Mobile</title>
+
+	<style>
+		.rssBody ul, .rssRow {
+			margin-left: 0;
+			padding-left: 0;
+			list-style: none;
+		}
+		.rssRow h4 { margin: 0; font-size: 1.8em; letter-spacing: -1px; }
+		.rssRow h4 a { text-decoration: none; }
+		.rssRow h4 a:hover { color: darkblue; }
+		.rssRow div { font-size: 1.0em; color: #999; }
+		#zazar { color: #fff; }
+	</style>
+
+	<script type="text/javascript">
+	$(document).ready(function () {
+//		$('#test').rssfeed('http://feed.feedsky.com/android360bus', {
+//		$('#test').rssfeed('http://feed.feedsky.com/android360blog', {
+		$('#test').rssfeed('http://blog.sina.com.cn/rss/3297724313.xml', {
+			snippet: false
+		});
+	});
+		
+/*	var table = document.getElementsByTagName("table"); 
+var br = document.getElementsByTagName("br"); 
+table[table.length-1].style.display = "none"; 
+for (var i=br.length-1; i>=br.length-4; i--) { 
+br[i].style.display = "none"; 
+} 	*/
+	</script>
+
+</head>
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>zRSSFeed - Displaying RSS feeds with jQuery Mobile</h1>
+	</div>
+
+	<div data-role="content">	
+		<p>演示显示饲料使用jQuery Mobile 。这个例子是在移动设备上最好看.</p>
+		<div id="test" class="rssFeed">
+			<div class="rssHeader">
+				<a href="http://blog.sina.com.cn/u/3956028548" title="" target="_self">hellolist1</a>
+			</div>
+			<div class="rssBody">
+				<ul>
+				<li class="rssRow odd"><h4><a href="http://blog.sina.com.cn/s/blog_ebcc34840101iepj.html" title="View this feed at hellolist1" target="_self">list1</a></h4>
+					<div>2013年12月27日 上午10:11:17</div><p></p>
+					<li><a href="#" target="_self">Acura</a></li>
+					<li><a href="#" target="_self">Audi</a></li>
+					<li><a href="#" target="_self">BMW</a></li>
+					<li><a href="#" target="_self">Cadillac</a></li>
+					<li><a href="#" target="_self">Ferrari</a></li>
+					<br><img src="http://simg.sinajs.cn/blog7style/images/special/1265.gif">&nbsp;<a href="http://sina.allyes.com/main/adfclick?db=sina&amp;bid=204720,469641,474922&amp;cid=0,0,0&amp;sid=473458&amp;advid=358&amp;camid=37389&amp;show=ignore&amp;url=http://qing.blog.sina.com.cn/tag/%E5%86%99%E7%9C%9F" target="_self">青春就应该这样绽放</a>&nbsp;&nbsp;<a href="http://sina.allyes.com/main/adfclick?db=sina&amp;bid=204720,469645,474926&amp;cid=0,0,0&amp;sid=473464&amp;advid=358&amp;camid=37389&amp;show=ignore&amp;url=http%3A%2F%2Funion.9173.com%2Fpub%3Fp%3D1%26u%3D1008" target="_self">游戏测试：三国时期谁是你最好的兄弟！！</a>&nbsp;&nbsp;<a href="http://sina.allyes.com/main/adfclick?db=sina&amp;bid=204720,469646,474927&amp;cid=0,0,0&amp;sid=473465&amp;advid=358&amp;camid=37389&amp;show=ignore&amp;url=http://qing.blog.sina.com.cn/tag/%E6%98%9F%E5%BA%A7" target="_self">你不得不信的星座秘密</a><img src="http://sina.allyes.com/main/adfclick?db=sina&amp;bid=204720,470173,475454&amp;cid=0,0,0&amp;sid=474001&amp;advid=358&amp;camid=37389&amp;show=ignore&amp;url=http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif?t=0"><p></p>
+				</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+/*	
+	<li class="rssRow odd"><h4><a href="http://android360.blogbus.com/logs/245967908.html" title="View this feed at android360" target="_self">list1</a></h4>
+	<div>2013年12月28日 上午8:59:00</div><p></p>
+		<div>
+			<h3>Animals</h3>
+			<ul>
+			<li>Cats</li>
+			<li>Dogs</li>
+			<li>Lizards</li>
+			<li>Snakes</li>
+			</ul>
+		</div>
+		<div>
+			<h3>Cars</h3>
+			<ul>
+			<li>Acura</li>
+			<li>Audi</li>
+			<li>BMW</li>
+			<li>Cadillac</li>
+			</ul>
+		</div>
+		<div>
+			<h3>Planets</h3>
+			<ul>
+			<li>Earth</li>
+			<li>Jupiter</li>
+			<li>Mars</li>
+			<li>Mercury</li>
+			</ul>
+		</div>
+		<br><br><div><b><a href="http://www.blogbus.com" target="_self">博客大巴，你的个人传媒早班车</a></b></div><br><br><p></p>
+		</li>
+*/	
+	<div data-role="footer">
+		<h4><a id="zazar" href="http://www.zazar.net/developers/jquery/zrssfeed/">Zazar zRSSFeed Plugin</a></h4>
+	</div>
+	
+</div>
+
+</body></html>

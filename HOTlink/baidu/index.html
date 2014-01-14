@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Frontia Index</title>
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="docs/styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="docs/styles/site.cerulean.css">
+	<script src="docs/docs/scripts/sunlight.js"></script>
+	<script src="docs/scripts/sunlight.javascript.js"></script>
+	<script src="docs/scripts/sunlight-plugin.doclinks.js"></script>
+	<script src="docs/scripts/sunlight-plugin.linenumbers.js"></script>
+	<script src="docs/scripts/sunlight-plugin.menu.js"></script>
+	<script src="docs/scripts/jquery.min.js"></script>
+	<script src="docs/scripts/jquery.scrollTo.js"></script>
+	<script src="docs/scripts/jquery.localScroll.js"></script>
+	<script src="docs/scripts/bootstrap-dropdown.js"></script>
+	<script src="docs/scripts/toc.js"></script>
+	<script>  Sunlight.highlightAll({lineNumbers:true,  showMenu: true, enableDoclinks :true}); </script>
+	<script>
+		$( function () {
+			$( "#toc" ).toc( {
+				selectors   : "h1,h2,h3,h4",
+				showAndHide : false,
+				scrollTo    : 60
+			} );
+			$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+			$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+		} );
+	</script>
+</head>
+<body>
+<div class="container-fluid">
+<div class="article">
+      <div style="display:none">&lt;sidebar&gt;sidebar:stor_menu&lt;/sidebar&gt;</div>
+<div class="zhh_toc_left"><button><a href="docs/index.html">DOCS</a></button></div>
+<div class="zhh_toc_clear"></div>
+<h2> <span class="mw-headline" id=".E6.A6.82.E8.BF.B0">概述</span></h2>
+<div style="text-indent:2em;">
+<p>本文主要面向百度云存储服务的开发者，开发者可通过此文学习如何使用百度云存储进行开发。
+</p><p>使用百度云存储服务进行开发的具体步骤如下：
+</p>
+</div>
+<div style="margin-left:20px;">
+<dl><dd>1. <a href="http://developer.baidu.com/wiki/index.php?title=docs/cplat/join#.E7.AC.AC.E4.BA.8C.E6.AD.A5.EF.BC.9A.E6.88.90.E4.B8.BA.E7.99.BE.E5.BA.A6.E5.BC.80.E5.8F.91.E8.80.85" class="external text" rel="nofollow" target="_blank">注册百度账号，并成为百度开发者</a>。
+</dd><dd>2. <a href="#.E5.88.9B.E5.BB.BA.E5.BA.94.E7.94.A8.E5.B9.B6.E8.8E.B7.E5.8F.96.E5.AF.86.E9.92.A5.E5.AF.B9.EF.BC.88ak.26sk.EF.BC.89">#创建应用并获取密钥对（ak&amp;sk）</a>
+</dd><dd>3. <a href="#.E5.88.9B.E5.BB.BAbucket">#创建bucket</a>
+</dd><dd>4. <a href="#.E4.B8.8A.E4.BC.A0.E6.96.87.E4.BB.B6">#上传文件</a>
+</dd><dd>5. <a href="#.E6.9D.83.E9.99.90.E8.AE.BE.E7.BD.AE">#权限设置</a>
+</dd></dl>
+</div>
+<h2> <span class="mw-headline" id=".E5.88.9B.E5.BB.BA.E5.BA.94.E7.94.A8.E5.B9.B6.E8.8E.B7.E5.8F.96.E5.AF.86.E9.92.A5.E5.AF.B9.EF.BC.88ak.26sk.EF.BC.89">创建应用并获取密钥对（ak&amp;sk）</span></h2>
+<div style="text-indent:2em;">
+<p>使用云存储服务，需要首先创建应用并获取应用密钥对。操作步骤如下：
+</p><p>1. 在<a href="http://developer.baidu.com/console" class="external text" rel="nofollow" target="_blank">管理中心</a>创建一个应用
+</p><p>2. 在应用基本信息页，获取相应的“API key 及 Secret Key”
+</p>
+</div>
+<h2> <span class="mw-headline" id=".E5.88.9B.E5.BB.BAbucket"> 创建bucket</span></h2>
+<div style="text-indent:2em;">
+<p>创建Bucket，可通过以下三种方式来实现:
+</p>
+</div>
+<div style="margin-left:20px;">
+<dl><dd>1. 通过<a href="http://developer.baidu.com/console" class="external text" rel="nofollow" target="_blank">云存储管理控制台</a>创建bucket。可以把bucket看成是命名空间，您的数据就存储在这个bucket里面。
+</dd><dd>2. 通过调用 REST API接口 <a href="/wiki/index.php?title=docs/cplat/stor/api#Put_Bucket" title="docs/cplat/stor/api">Put_Bucket</a>实现
+</dd><dd>3. 通过SDK，调用相关接口来实现
+</dd></dl>
+</div>
+<h2> <span class="mw-headline" id=".E4.B8.8A.E4.BC.A0.E6.96.87.E4.BB.B6"> 上传文件 </span></h2>
+<div style="text-indent:2em;">
+<p>使用云存储服务上传文件有以下四种途径：
+</p>
+</div>
+<div style="margin-left:20px;">
+<dl><dd>1. 使用Shell Tool上传
+</dd><dd>2. 使用SDK进行上传
+</dd><dd>3. 直接使用curl命令上传
+</dd><dd>4. 通过云存储管理控制台上传
+</dd></dl>
+</div>
+<h3> <span class="mw-headline" id=".E4.BD.BF.E7.94.A8shell_tool.E4.B8.8A.E4.BC.A0"> 使用shell tool上传</span></h3>
+<div style="text-indent:2em;">
+<p>了解使用shell tool上传文件的详细内容及下载shell tool，请参考<a href="http://developer.baidu.com/wiki/index.php?title=docs/cplat/stor/sdk#Shell-Tool" class="external text" rel="nofollow" target="_blank">Shell Tool</a>相关介绍。
+</p>
+</div>
+<h3> <span class="mw-headline" id=".E4.BD.BF.E7.94.A8SDK.E4.B8.8A.E4.BC.A0"> 使用SDK上传 </span></h3>
+<div style="text-indent:2em;">
+<p>目前百度云存储服务已为广大开发者提供了以下SDK：
+</p>
+</div>
+<div style="margin-left:20px;">
+<dl><dd><ul><li> PHP SDK
+</li><li> Java SDK
+</li><li> Python SDK
+</li><li> C/C++（linux版本）SDK
+</li></ul>
+</dd></dl>
+</div>
+<div style="text-indent:2em;">
+<p><b>如需下载相应的SDK，请点击<a href="/wiki/index.php?title=docs/cplat/stor/sdk" title="docs/cplat/stor/sdk">这里</a>。</b>
+</p>
+</div>
+<h3> <span class="mw-headline" id=".E7.9B.B4.E6.8E.A5.E4.BD.BF.E7.94.A8curl.E4.B8.8A.E4.BC.A0"> 直接使用curl上传 </span></h3>
+<p><b>1.&nbsp; 获取上传链接：</b>
+</p>
+<dl><dd><ul><li>上传地址： 
+</li></ul>
+</dd></dl>
+<pre>bcs.duapp.com</pre>
+<dl><dd><ul><li>获取上传链接：
+</li></ul>
+<dl><dd>通过云存储管理控制台的“URL签名”工具直接计算签名
+<dl><dd>填写以下信息：
+</dd></dl>
+</dd></dl>
+</dd></dl>
+<pre>     Host： bcs.duapp.com
+     Access Key: （“应用的基本信息页面”中查看）
+     Secret Key:  
+     Method: PUT
+     Bucket: 在<a href="http://developer.baidu.com/console" class="external text" rel="nofollow" target="_blank">云存储管理平台</a>中查看自己的bucket信息
+     Object：/testobject
+</pre>
+<dl><dd><dl><dd>点击“签名”按钮：签名后的地址已经全部列出来了，拷贝put操作对应的地址即可。
+</dd><dd>其实其他操作的签名也都算好了。 
+</dd></dl>
+</dd></dl>
+<p><br>
+<b>2.&nbsp; 上传文件：</b>
+</p>
+<dl><dd>例如：要上传本地文件bs.txt到云存储，并且命名为：testobject。
+</dd></dl>
+<pre>curl -T bs.txt -v 
+“<a href="http://bcs.duapp.com/bucket/testobject?sign=MBO:f:PVaOdaf%2BxNoC7aXRqL%2FJq5Kp7a4%3D" class="external free" rel="nofollow" target="_blank">http://bcs.duapp.com/bucket/testobject?sign=MBO:f:PVaOdaf%2BxNoC7aXRqL%2FJq5Kp7a4%3D</a>"
+</pre>
+<h3> <span class="mw-headline" id=".E7.9B.B4.E6.8E.A5.E9.80.9A.E8.BF.87.E7.AE.A1.E7.90.86.E6.8E.A7.E5.88.B6.E5.8F.B0.E4.B8.8A.E4.BC.A0"> 直接通过管理控制台上传</span></h3>
+<div style="text-indent:2em;">
+<p>通过<a href="/wiki/index.php?title=docs/cplat/stor/console" title="docs/cplat/stor/console">云存储管理控制台</a>，选择页面的“上传”即可。
+</p>
+<dl><dd><ul><li>没有bucket的情况下，需先创建bucket；
+</li><li>已创建bucket的情况下，选择并点击要上传文件的bucket名称，进入该bucket页面后再选择“上传文件”进行文件上传操作。
+</li></ul>
+</dd></dl>
+</div>
+<h2> <span class="mw-headline" id=".E6.9D.83.E9.99.90.E8.AE.BE.E7.BD.AE">权限设置</span></h2>
+<div style="text-indent:2em;">
+<p>通过ACL设置bucket或object的访问权限。
+</p><p>创建bucket及上传文件时，默认是“私有”状态，通过ACL设置接口，可将其状态设置为公开或自定义访问权限。
+</p>
+<dl><dd><ul><li>设置为<b>公开读（public-read）</b>时，访问链接可不带签名，默认为所有人都可访问该资源。
+</li></ul>
+</dd></dl>
+<dl><dd><ul><li>设置为<b>私有（private）</b>时，访问链接需带签名，默认只有获取相关AK&amp;SK的用户才可访问该资源。
+</li></ul>
+</dd></dl>
+</div>
+<div class="wikiClear"></div><br>
+<hr>
+<div style="margin-top:10px;">
+ <div class="like" style="margin-top:0;">
+	<div id="like" class="bdlikebutton bdlikebutton-blue bdlikebutton-small bdlikebutton-small-blue bdlikebutton-small-blue-dislike">
+		<div class="bdlikebutton-inner">
+			<div class="bdlikebutton-count">56</div>
+		</div>
+	</div>
+<div id="dislike" class="bdlikebutton bdlikebutton-blue bdlikebutton-small bdlikebutton-small-blue bdlikebutton-small-blue-like"><span style="margin-top:4px;display:block;">我要提问题</span>
+<span style="display:none;"><a href="http://developer.baidu.com/feedback#/list!cid=20" class="external autonumber" rel="nofollow" target="_blank">[1]</a></span></div>
+</div>
+</div>
+<!-- 
+NewPP limit report
+Preprocessor node count: 70/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+<!-- Saved in parser cache with key mco_developer_wiki-developer:pcache:idhash:708-0!1!0!!zh-hans!2!edit=0 and timestamp 20140104165800 -->
+<div class="printfooter">
+取自“<a href="http://developer.baidu.com/wiki/index.php?title=docs/cplat/stor/guide">http://developer.baidu.com/wiki/index.php?title=docs/cplat/stor/guide</a>”</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿<?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+<!DOCTYPE html><html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOTouch</title>
+	<link rel="stylesheet"  href="_assets/css/jquery.mobile-1.4.0.min.css">
+	<script src="_assets/js/jquery.js"></script>
+	<script src="_assets/js/index.js"></script>
+	<script src="_assets/js/jquery.mobile-1.4.0.min.js"></script>
+	<script src="_assets/js/mybaidu.js"></script>
+  <style> #edit-with-js-bin { display: none !important; } </style>
+</head>
+<body>
+   <div id="head" data-theme="b" data-role="header">
+    <h1>浩拓互联-精彩由你</h1>
+	</div><?php } ?>
+<div data-role="page" id="page1" data-theme="a">
+ <div role="main" class="ui-content">
+  <div data-role="controlgroup" data-type="horizontal">
+	  <a href="#page1">fade</a>
+	  <a href="#page1">pop</a>
+	  <a href="#page1">flip</a>
+	  <a href="#page1">turn</a>
+	  <a href="#page1">flow</a>
+  </div>
+      <h1>页面过渡效果</h1>
+      <div>只是幻灯片切换引发的问题使页面被隐藏。
+		  <label><input type="checkbox" id="cb1" data-theme="b"/>reverse</label>
+		  <label><input type="checkbox" id="cb2" data-theme="b"/>预选</label>
+		</div>
+      <div id="p1"></div>
+  <div data-role="controlgroup" data-type="horizontal">
+      <a href="#page1">slide</a>
+      <a href="#page1">slidefade</a>
+      <a href="#page1">slideup</a>
+	  <a href="#page1">slidedown</a>
+     <a href="#page1">none</a>
+  </div>
+  </div><!-- /content 1 -->
+<script>
+$('#page1').on('pageinit', function() {
+  $('#page1 a').addClass('ui-btn ui-corner-all');
+    $('a').bind('click', function(e) {
+    var trans = $(this).text() || 'none',
+        rev = !!$('#cb1').attr('checked');
+
+    $.mobile.changePage('#page1', { transition: trans,
+                                    allowSamePageTransition: true,
+                                    reverse: rev } );
+    $('#p1').text( '效果: ' + trans + ' - reverse: ' + rev );
+  });
+});
+
+$('#page1').bind('pagehide', function(e) {
+  $('a.ui-btn').removeClass('ui-btn-active');
+  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-btn-active') ) { 
+    $(this).addClass('ui-page-active');
+  }
+});
+</script>
+</div><!-- /page 1 -->
+<?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+	<div id="foot" data-theme="c" data-position="fixed" data-role="footer" data-fullscreen="true">
+	   <div data-role="navbar">
+			<ul>
+				<li><a href="version.html" data-icon="recycle"></a></li>
+				<li><a href="about.html" data-icon="star" class="ui-btn-active"></a></li>
+				<li><a href="index.html" data-icon="action"></a></li>
+			</ul>
+      </div><!-- /navbar -->
+	</div><!-- /footer --><?php } ?>
+</body></html>

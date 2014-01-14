@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omade xmlns:xsi="http://www.chinamobile.com"
+	xsi:noNamespaceSchemaLocation="http://www.chinamobile.com/omae.xsd">
+	<subDomain>test</subDomain>
+	<version>1</version>
+	<sdkversion>1.0</sdkversion>
+</omade>

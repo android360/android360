@@ -1,0 +1,47 @@
+﻿<?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+<!DOCTYPE html><html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOTouch</title>
+	<link rel="stylesheet"  href="assets/css/jquery.mobile-1.4.0.min.css">
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/index.js"></script>
+	<script src="assets/js/jquery.mobile-1.4.0.min.js"></script>
+	<style>#col {argin:center}</style>
+	<script>
+		$( document ).one( "pagecreate",function() {
+			$("#head").toolbar();
+		});
+	</script>
+</head><body>
+	<div id="head" data-position="fixed" data-role="header" data-theme="b">
+		<a href="index.html" class="ui-btn ui-corner-all ui-btn-left ui-icon-home ui-btn-icon-notext"></a>
+		<h1></h1>
+	</div><!-- /header --><?php } ?>
+<div data-role="page"><div role="main" class="ui-content">
+
+	<div id="col" data-role="collapsible-set">
+		<div data-role="collapsible">
+			<h2>Heading</h2>
+			<h3>Head</h3>
+			<p>Lorem</p>
+		</div>
+		<div data-role="collapsible">
+			<h2>Heading</h2>
+			<p>Lorem</p>
+		</div>
+		<div data-role="collapsible">
+			<h2>Heading</h2>
+			<p>Lorem</p>
+		</div>
+		<div data-role="collapsible">
+			<h2>Heading</h2>
+			<p>Lorem</p>
+		</div>
+	</div>
+	<div data-role="footer" data-tap-toggle="false" class="jqm-footer ui-footer ui-footer-fixed slideup ui-bar-inherit" role="contentinfo">
+		<p>jQuery Mobile Demos version <span class="jqm-version">1.4.0</span></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div>
+</div></div><!--content-page-->
+</body></html>

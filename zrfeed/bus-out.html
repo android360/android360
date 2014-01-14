@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="content-language" content="en">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
+	<script src="jquery.zrssfeed.js"></script>
+	<link href="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" rel="stylesheet">
+	<title>bus-out</title>
+	<script>
+	$(document).ready(function () {
+		$('.ui-content').rssfeed(' http://feed.feedsky.com/android360bus', {
+			snippet: false
+		});
+		$('button').click(function(){
+			$('.rssRow div:has("ul")').css('background','red');
+//			$('.rssRow:nth-child(2)').css('color','red');
+//			$.remove('.rssRow div.eq(0)');
+//			$('div').remove('<div><b><a href="http://www.blogbus.com" target="_self">博客大巴，你的个人传媒早班车</a></b></div>');
+//			$.remove('.rssRow div:last');
+//			$(':empty').css('color','red');  //空元素
+//			$('.rssRow').css('color','red');//选择小于n,大于m的子元素
+//			.gt(n)   .lt(m)
+//			$(':header').css('color','red');//h1-h5
+//			$('b').css('color','red');
+//			$('div:has("b")').css('color','red');//同上
+//			$('.rssRow :not(":has("ul")")).css('color','red');
+		});
+	});
+	</script>
+</head>
+<body>
+<div data-role="page" data-theme="b">
+
+	<div data-role="header" class="ui-title" data-fullscreen="true" data-position="fixed" data-theme="b">
+		<button class="ui-btn-right ui-btn ui-btn-a ui-btn-inline ui-corner-all ui-btn-icon-right ui-icon-check">button</button>
+	</div>
+	
+		<form>
+			<input data-theme="a" data-type="search" id="searchForCollapsibleSet">
+		</form>
+		<div class="rssRowbody" data-role="collapsible-set" data-filter="true" data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
+			<div class="rssRow odd">
+				<h4><a href="http://android360.blogbus.com/logs/245982747.html" title="View this feed at bolgbus" target="_self">list_test</a></h4>
+				<div>2013年12月28日 上午10:10:00</div><p></p>
+				<div>
+					<h3>Animals</h3>
+					<ul>
+					<li>Cats</li>
+					<li>Dogs</li>
+					<li>Lizards</li>
+					<li>Snakes</li>
+					</ul>
+				</div>
+				<div>
+					<h3>Cars</h3>
+					<ul>
+					<li>Acura</li>
+					<li>Audi</li>
+					<li>BMW</li>
+					<li>Cadillac</li>
+					</ul>
+				</div>
+				<div>
+					<h3>Planets</h3>
+					<ul>
+					<li>Earth</li>
+					<li>Jupiter</li>
+					<li>Mars</li>
+					<li>Mercury</li>
+					</ul>
+				</div>
+				<br><br>
+				<div><b><a href="http://www.blogbus.com" target="_self">博客大巴，你的个人传媒早班车</a></b></div>
+				<br><br><p></p>
+			</div>
+			<div class="rssRow even">
+				<h4><a href="http://android360.blogbus.com/logs/245982521.html" title="View this feed at bolgbus" target="_self">listtest</a></h4>
+				<div>2013年12月28日 上午10:07:00</div><p></p>
+				<div>
+					<h3>Animals</h3>
+					<ul>
+					<li>Cats</li>
+					<li>Dogs</li>
+					<li>Lizards</li>
+					<li>Snakes</li>
+					</ul>
+				</div>
+				<div>
+					<h3>Cars</h3>
+					<ul>
+					<li>Acura</li>
+					<li>Audi</li>
+					<li>BMW</li>
+					<li>Cadillac</li>
+					</ul>
+				</div>
+				<div>
+					<h3>Planets</h3>
+					<ul>
+					<li>Earth</li>
+					<li>Jupiter</li>
+					<li>Mars</li>
+					<li>Mercury</li>
+					</ul>
+				</div>
+				<br><br>
+				<div><b><a href="http://www.blogbus.com" target="_self">博客大巴，你的个人传媒早班车</a>
+				</b></div><br><br><p></p>
+			</div>
+			<div class="rssRow odd"><h4><a href="http://android360.blogbus.com/logs/245967908.html" title="View this feed at bolgbus" target="_self">list1</a></h4>
+				<div>2013年12月28日 上午8:59:00</div><p></p>
+				<div>
+					<h3>Animals</h3>
+					<ul>
+					<li>Cats</li>
+					<li>Dogs</li>
+					<li>Lizards</li>
+					<li>Snakes</li>
+					</ul>
+				</div>
+				<div>
+					<h3>Cars</h3>
+					<ul>
+					<li>Acura</li>
+					<li>Audi</li>
+					<li>BMW</li>
+					<li>Cadillac</li>
+					</ul>
+				</div>
+				<div>
+					<h3>Planets</h3>
+					<ul>
+					<li>Earth</li>
+					<li>Jupiter</li>
+					<li>Mars</li>
+					<li>Mercury</li>
+					</ul>
+				</div>
+				<br><br>
+				<div><b><a href="http://www.blogbus.com" target="_self">博客大巴，你的个人传媒早班车</a>
+				</b></div><br><br><p></p>
+			</div>
+		</div>
+	</div>
+		
+</div>
+</body>
+</html>

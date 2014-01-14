@@ -1,0 +1,628 @@
+﻿
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>MyNote</title>
+    <script language="javascript" type="text/javascript">
+       var originalPath="D:\\百度云同步盘\\jQuerymobile\\";//文件路径,取 路径 文本框的值,默认为mynote.txt,可以存储为.doc
+       var minuteAmount=15; //过多少分钟，键盘无响应，自动关闭窗口，默认为15分钟
+       var ForReading = 1, ForWriting = 2, ForAppending = 8;
+       var TristateUseDefault = -2, TristateTrue = -1, TristateFalse = 0;
+       //day.toLocaleTimeString();
+       //设置日期格式,存储时，包含时分秒，在界面上显示时只显示日期。
+       function getNowFormatDate(){
+            var day = new Date();
+            //alert(day.toLocaleDateString());
+            var Year = 0;
+            var Month = 0;
+            var Day = 0;
+            var CurrentDate = "";
+            //初始化时间
+             //Year       = day.getYear();//有火狐下2008年显示108的bug
+            Year       = day.getFullYear();//ie火狐下都可以
+            Month      = day.getMonth()+1;
+            Day        = day.getDate();
+            var time   =day.getTime();
+            CurrentDate += Year + "-";
+           if (Month >= 10 )
+           {
+            CurrentDate += Month + "-";
+           }
+           else
+           {
+            CurrentDate += "0" + Month + "-";
+           }
+           if (Day >= 10 )
+           {
+            CurrentDate += Day ;
+           }
+           else
+           {
+            CurrentDate += "0" + Day ;
+           }
+           return CurrentDate+" "+day.toLocaleTimeString();
+        }
+    //修改原有笔记，原理：用当前的文本框的内容，替换原来文件的内容。慎用!
+    function ModifyNote(){
+         var btnName=document.getElementById("btnModify").value;
+         if(btnName=="修改"){
+             var pwd;
+             pwd=prompt( " Please enter the password:","")
+             if(pwd!="123"){
+//                  alert("Sorry，Password is wrong！")
+                  return;
+             }
+            document.getElementById("btnSave").disabled=true;
+            document.getElementById("btnModify").value="保存";
+            var fso=new ActiveXObject("Scripting.FileSystemObject");
+            var filepath=originalPath+document.getElementById("filepath").value;
+            var file = fso.GetFile(filepath);
+            var ts = file.OpenAsTextStream(ForReading,TristateUseDefault);
+            //var mynote = ts.ReadLine(); 读取一行
+            var mynote=ts.ReadAll(); //读取全部
+            ts.Close();
+            document.getElementById("content").innerText=mynote;
+        }
+        else
+        {
+            document.getElementById("btnModify").value="修改";
+            document.getElementById("btnSave").disabled=false;
+            var file;
+            var fso = new ActiveXObject("Scripting.FileSystemObject");
+            var filepath=originalPath+document.getElementById("filepath").value;
+            try{
+                file = fso.GetFile(filepath); //尝试获取文件
+            }
+            catch(e){
+               file=null;
+            }
+            if(!file){ //文件不存在，创建新文件
+                try{
+                    var folderpath=filepath.split("\\");
+                    if(folderpath.length>3)
+                    {
+                        var newpath="";
+                        for(var i=0;i<folderpath.length-2;i++) //获取新路径
+                        {
+                            newpath+=folderpath[i]+"\\"
+                             try
+                            {
+                                    fso.CreateFolder(newpath); //根据路径，创建一个文件夹
+                            }
+                            catch(e)
+                           {
+                            }
+                        }
+                   }
+                    fso.CreateTextFile(filepath); //在新建立的文件夹下创建文件
+                    file=fso.GetFile(filepath);   //获取新建的文件，取文件流
+                }
+                catch(e){
+                    file=null;
+                }
+            }
+            if(file==null){
+                alert("创建文件失败!");
+                return;
+            }
+            var ts = file.OpenAsTextStream(ForWriting , TristateUseDefault);
+            ts.Write(document.getElementById("content").innerHTML);
+            ts.Close();
+            ClearNote();
+        }
+    }
+    //记录新的笔记
+    function WriteNote(flag){
+        var title=document.getElementById("title").value;
+        var content=document.getElementById("content").innerHTML;
+        if(flag)
+        {
+            if(content==""||title==""){
+                alert("标题和内容不能为空啊");
+                return;
+            }
+        }
+        var file;
+        var fso = new ActiveXObject("Scripting.FileSystemObject");
+        var filepath=originalPath+document.getElementById("filepath").value;
+        try{
+            file = fso.GetFile(filepath); //尝试获取文件
+        }
+        catch(e){
+           file=null;
+        }
+        if(!file){
+            try{
+                var folderpath=filepath.split("\\");
+                if(folderpath.length>2)
+                {
+                    var newpath="";
+                    for(var i=0;i<folderpath.length-1;i++)
+                    {
+                        newpath+=folderpath[i]+"\\"
+                        try{
+                        //如果文件夹不存在，先创建一个文件夹.
+                           fso.CreateFolder(newpath);
+                        }
+                       catch(e)
+                       {
+                        //文件夹已存在时，什么也不做.
+                        }
+                    }
+               }
+                fso.CreateTextFile(filepath);//文件不存在时，创建文件
+                file=fso.GetFile(filepath);  //获取新建的文件
+            }
+            catch(e){
+                file=null;
+            }
+        }
+        if(file==null){
+            alert("创建文件失败!");
+            return;
+        }
+        var ts = file.OpenAsTextStream(ForAppending ,TristateUseDefault);
+        content=content.replace(new RegExp( "\\n", "g" ),"\r\n"); //js把textarea中的换行会看成\n，所以在此用正则表达式进行替换
+        ts.Write("\r\n\r\n标题：");
+        ts.Write(title);
+        ts.Write("\r\n内容：\r\n");
+        ts.Write(content);
+        ts.Write("\r\n日期：")
+        ts.Write(getNowFormatDate());
+        ts.Close();
+        ClearNote();
+       }
+       //查看当前路径文件中的所有笔记，仅查看（当然查看完后，可以点击修改），木有查询功能呐，存在文本文件里面，小弟水平用限，尚未能实现，待来日改进
+       function  ReadNote(){
+            var fso=new ActiveXObject("Scripting.FileSystemObject");
+            var filepath=originalPath+document.getElementById("filepath").value;
+            var file = fso.GetFile(filepath);
+            var ts = file.OpenAsTextStream(ForReading,TristateUseDefault);
+            //var mynote = ts.ReadLine(); 读取一行
+            var mynote=ts.ReadAll(); //读取全部
+            ts.Close();
+            document.getElementById("content2").innerText=mynote;
+        }
+       //初始化
+       function init(){
+         setInterval("document.getElementById('date').value=getNowFormatDate()",1000);
+//        document.getElementById("date").value=getNowFormatDate().split(' ')[0];
+        document.getElementById("write").style.visibility="visible";
+        document.getElementById("read").style.visibility="hidden";
+        document.getElementById("content2").innerHTML="";
+       }
+       //清空当前文本框，并不是已有笔记
+       function ClearNote(){
+       document.getElementById("content").value="";
+       document.getElementById("title").value="";
+       }
+        var silence
+        /*/快捷键设置，这个有浏览器兼容问题
+        function shortCut(){
+            clearTimeout(silence);
+            //15分钟没有键盘操作，自动关闭当前窗口
+            silence=setTimeout("closeWindow()",minuteAmount*60*1000);
+            //提交日志 ：Ctrl+S  S表示Save
+            if(window.event.keyCode==83&&window.event.ctrlKey){
+                WriteNote(true);
+           }
+           //查看 ：Ctrl+O   O表示Open
+           if(window.event.keyCode==79&&window.event.ctrlKey){
+                CheckUser();
+           }
+           //修改： Ctrl+M   M表示Modify
+           if(window.event.keyCode==77&&window.event.ctrlKey){
+                ModifyNote();
+           }
+            //返回写笔记状态：Ctrl+<--
+           if(window.event.keyCode==37&&window.event.ctrlKey){
+               init();
+           }
+          if(event.keyCode==116){          //屏蔽 F5 刷新键
+             event.keyCode=0;
+             event.returnValue=false;
+          }
+          if ((event.ctrlKey)&&(event.keyCode==78)){   //屏蔽 Ctrl+n
+             event.returnValue=false;
+          }
+     */  }
+        //关闭窗口时不弹出提示框
+        function closeWindow(){
+                //WriteNote(false);
+                if(!window.opener){
+                    window.open("","_self");
+                    window.close();
+                } else {
+                    window.close();
+                }
+            }
+       //密码验证，骗骗外行银
+       function CheckUser(){
+         var btnName=document.getElementById("btnRead").value;
+           var pwd;
+           pwd=prompt( " Please enter the password:","")
+           if(pwd=="123"){
+                document.getElementById("write").style.visibility="hidden";
+                ReadNote();
+                document.getElementById("read").style.visibility="visible";
+            }
+        }
+    </script>
+    <style>
+        #title, #date, #filepath
+        {
+            width: 300px;
+            height: 16px;
+            margin: 5px 0px;
+        }
+        #title, #date, #filepath, #content, #content2
+        {
+            background-color: #e2f5fa;
+        }
+        .slimdiv
+        {
+            text-align: left;
+            height: auto;
+            width: 800px;
+            margin: 0 auto;
+        }
+        body
+        {
+            background-color: #cacae1;
+            color: #186277;
+            font-size: 12pt;
+        }
+        ipnut
+        {
+            background-color: Yellow;
+        }
+        #write, #read
+        {
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body onkeydown="shortCut()">
+    <div id="read" class="slimdiv">
+        <a href="javascript:init()">返回</a>
+        <div id="content2">
+        </div>
+        <a href="javascript:init()">返回</a>
+    </div>
+    <div id="write">
+        <div class="slimdiv">
+            标题<input type="text" id="title" /><br />
+        </div>
+        <div class="slimdiv">
+            <textarea rows="25" cols="100" id="content"></textarea><br />
+        </div>
+        <div class="slimdiv">
+            时间<input type="text" id="date" /><br />
+            名称<input type="text" id="filepath" value="mynote.txt" /><br />
+        </div>
+        <div style="text-align: center;">
+            <input type="button" value="提交" id="btnSave" />
+            <input type="button" value="查看" id="btnRead" />
+            <input type="button" value="修改" id="btnModify" />
+        </div>
+    </div>
+    <script>
+         init();
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HOME</title>
+	<link rel="stylesheet"  href="css-js/jquery.mobile-1.4.0.min.css">
+	<script src="css-js/jquery.js"></script>
+	<script src="css-js/index.js"></script>
+	<script src="css-js/jquery.mobile-1.4.0.min.js"></script>
+	<script id="script" src="css-js/jquery.mobile.nestedlists.js"></script>
+</head>
+<body>
+<div data-role="page">
+<div data-theme="a" data-form="ui-body-a" class="ui-body ui-body-a ui-corner-all">
+						<!-- 正文开始 -->
+		<div id="sina_keyword_ad_area2" class="articalContent  ">
+			<p>今天来演示一个用jquery完成的效果：可编辑的表格。</p>
+<p><strong>1.先写一个含有表格的页面jqueryEdit.html:</strong></p>
+<p>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01
+Transitional//EN"<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+"<a href="http://www.w3.org/TR/html4/loose.dtd">http://www.w3.org/TR/html4/loose.dtd</a>"&gt;<br>
+
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;title&gt;jquery示例3:可修改的表格&lt;/title&gt;<br>
+
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> <font color="#FF0000">&lt;script type="text/javascript"
+src="jslib/jquery.js"&gt;&lt;/script&gt;<br>
+
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;script type="text/javascript"
+src="jslib/jqueryEditUseBlur.js"&gt;&lt;/script&gt;</font><br>
+
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;table border="1"&gt;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;tbody&gt;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;tr&gt;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;td&gt;1234&lt;/td&gt;<br>
+
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;td&gt;5678&lt;/td&gt;<br>
+
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;/tr&gt;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;/tbody&gt;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+&lt;/table&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</p>
+<p>&nbsp;<wbr></p>
+<p>
+<strong>2.书写一个javaScript脚本文件，来完成表格的可编辑效果，jqueryEdit.js:</strong></p>
+<p>
+<strong>这个文件中，当输入框修改完后是按回车键提交的，下面一个文件是通过鼠标相对文本框失去焦点来实现提交的，本人认为下面第二种方法比较合乎实际一点。</strong></p>
+<p><font color="#FF0000">//在页面加载的时候，让所有的td有一个点击事件<br>
+$(document).ready(function(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var tdNods =
+$("td");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+tdNods.click(tdClick);<br>
+});</font></p>
+<p><font color="#FF0000">//td点击触发的函数<br>
+function tdClick(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//1.取出当前td里面的文本内容<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var td = $(this);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var tdText = td.text();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//2.清空td里面的文本内容<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.html(""); //也可以使用td.empty();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//3.建立一个输入框，也就是input标签<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var input = $("&lt;input&gt;");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//4.将输入框的内容设为刚才保存的td里面的文本内容<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+input.attr("value",tdText);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//4.5.让文本框能够响应键盘按下的keyup事件，主要是用于处理回车确认<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+input.keyup(function(event){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//1.获取当前用户按下的键值<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//解决不同浏览器获得事件对象的差异,<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+// IE用自动提供window.event，而其他浏览器必须显示的提供，即在方法参数中加上event<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var myEvent = event || window.event;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var keyCode = myEvent.keyCode;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//2.判断是否是回车按下<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+if(keyCode == 13){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//2.保存当前输入框的内容<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var input = $(this);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var inputText = input.val();//这个地方不能用text(),而是用val()<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//3.清空td的内容,即去掉输入框<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var td = input.parent("td");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.empty();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//4.将保存的文本内容填充到td中去<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.html(inputText);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//5.让td重新拥有点击事件<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.click(tdClick);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+}<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+});<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//5.将输入框加到td中<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.append(input);&nbsp;<wbr> //也可以用input.appendTo(td);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//5.5 让文本框中的文字被高亮选中<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//需要将jquery对象转化为DOM对象<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var inputDom = input.get(0);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+inputDom.select();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//6.需要移除td上的点击事件<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.unbind("click");<br>
+};</font></p>
+<p>&nbsp;<wbr></p>
+<p>
+<strong>下面这个脚本文件是通过鼠标相对文本框失去焦点来实现提交的jqueryEditUseBlur.js:</strong></p>
+<p><strong>下面用红色显示的是与上面文件不一样的地方。</strong></p>
+<p>//在页面加载时候，就使td节点具有click点击能力<br>
+$(document).ready(function(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var tdNods =
+$("td");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+tdNods.click(tdClick);<br>
+});</p>
+<p>//td的点击事件<br>
+function tdClick(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的文本内容保存<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var td =
+$(this);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var tdText =
+td.text();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的内容清空<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.empty();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//新建一个输入框<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var input =
+$("&lt;input&gt;");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将保存的文本内容赋值给输入框<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+input.attr("value",tdText);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将输入框添加到td中<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.append(input);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> <font color="#FF0000"><strong>//给输入框注册事件，当失去焦点时就可以将文本保存起来<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+input.blur(function(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将输入框的文本保存<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var input = $(this);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var inputText = input.val();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的内容，即输入框去掉,然后给td赋值<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var td = input.parent("td");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.html(inputText);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//让td重新拥有点击事件<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.click(tdClick);</strong></font></p>
+<p><strong><font color="#FF0000">&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+});</font><br></strong>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将输入框中的文本高亮选中<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将jquery对象转化为DOM对象<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var inputDom
+= input.get(0);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+inputDom.select();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的点击事件移除<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.unbind("click");<br>
+}</p>
+<p>&nbsp;<wbr></p>
+<p><strong>3.对上面的效果进行进一步的修改，使之更加人性化（红色字体是修改过的地方）</strong></p>
+<p><strong><font color="#FF0000">通过修改使你在修改的过程中文本的内容可以按Esc键撤销还原到修改前的状态</font></strong></p>
+<p>//在页面加载时候，就使td节点具有click点击能力<br>
+$(document).ready(function(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var tdNods =
+$("td");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+tdNods.click(tdClick);<br>
+});</p>
+<p>//td的点击事件<br>
+function tdClick(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的文本内容保存<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var td =
+$(this);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var tdText =
+td.text();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的内容清空<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.empty();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//新建一个输入框<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var input =
+$("&lt;input&gt;");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将保存的文本内容赋值给输入框<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+input.attr("value",tdText);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将输入框添加到td中<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.append(input);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//给输入框注册事件，当失去焦点时就可以将文本保存起来<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+input.blur(function(){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将输入框的文本保存<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var input = $(this);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var inputText = input.val();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的内容，即输入框去掉,然后给td赋值<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var td = input.parent("td");<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.html(inputText);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//让td重新拥有点击事件<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.click(tdClick);</p>
+<p>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> });<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> <font color="#FF0000"><strong>input.keyup(function(event){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//1.获取当前用户按下的键值<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//解决不同浏览器获得事件对象的差异,<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+// IE用自动提供window.event，而其他浏览器必须显示的提供，即在方法参数中加上event<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var myEvent = event || window.event;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+var keyCode = myEvent.keyCode;<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//2.判断是否是ESC键按下<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+if(keyCode == 27){<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将input输入框的值还原成修改之前的值<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+input.val(tdText);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+}<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+});<br></strong></font>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将输入框中的文本高亮选中<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将jquery对象转化为DOM对象<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> var inputDom
+= input.get(0);<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+inputDom.select();<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+//将td的点击事件移除<br>
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+td.unbind("click");<br>
+}</p>							
+		</div>
+						<!-- 正文结束 -->
+</div>
+</div>
+</body>
+</html>

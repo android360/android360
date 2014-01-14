@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<meta http-equiv="content-language" content="en" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
+	<script src="jquery.zrssfeed.js"></script>
+	<link href="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" rel="stylesheet" />
+	<title>sinablog</title>
+<!--	<style>
+		.rssBody ul, .rssRow {
+			margin-left: 0;
+			padding-left: 0;
+			list-style: none;
+		}
+		.rssRow h4 { margin: 0; font-size: 1.8em; letter-spacing: -1px; }
+		.rssRow h4 a { text-decoration: none; }
+		.rssRow h4 a:hover { color: darkblue; }
+		.rssRow div { font-size: 1.0em; color: #999; }
+		#zazar { color: #fff; }
+	</style>  -->
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$('.ui-content').rssfeed(' http://feed.feedsky.com/android360blog', {
+			snippet: false
+		});
+	});
+	</script>
+</head>
+<body>
+<div data-role="page" data-theme="a">
+
+	<div data-role="header" class="ui-title" data-fullscreen="true" data-position="fixed" data-theme="b">
+		<button class="ui-btn-right ui-btn ui-btn-a ui-btn-inline ui-corner-all ui-btn-icon-right ui-icon-check">button</button>
+	</div>
+
+	<div role="main" class="ui-content">
+	</div>
+	
+</div>
+</body>
+</html>
